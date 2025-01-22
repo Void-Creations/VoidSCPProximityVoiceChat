@@ -43,27 +43,33 @@ namespace VoidSCPProximityVoiceChat
         [Description("Hint displayed when a scp activates its proximity chat.")]
         public Message ProximityChatEnabled { get; set; } = new()
         {
-            Type = MessageType.Hint,
-            Content = "<b>Proximity chat is now <color=green>enabled</color>.</b>",
-            Duration = 3,
+            Text = "<b><align=center><color=#FFFFFF%ALPHA%>Proximity chat is now <color=#00FF00%ALPHA%>enabled</color>.</color></align></b>",
+            Duration = 5,
             Show = true,
+            FadeOut = true,
+            TargetPosX = 0,
+            TargetPosY = 300,
         };
 
         [Description("Hint displayed when a scp deactivates its proximity chat.")]
         public Message ProximityChatDisabled { get; set; } = new()
         {
-            Type = MessageType.Hint,
-            Content = "<b>Proximity chat is now <color=red>disabled</color>.</b>",
-            Duration = 3,
+            Text = "<b><align=center><color=#FFFFFF%ALPHA%>Proximity chat is now <color=#FF0000%ALPHA%>disabled</color>.</color></align></b>",
+            Duration = 5,
             Show = true,
+            FadeOut = true,
+            TargetPosX = 0,
+            TargetPosY = 300,
         };
 
         public Message ProximityChatRole { get; set; } = new()
         {
-            Type = MessageType.Broadcast,
-            Content = "<b>You can toggle proximity chat by using the keybind configured in your settings.</b>",
+            Text = "<b><align=center><color=#FFFFFF%ALPHA%>You can toggle proximity chat by using the keybind configured in your settings.</color></align></b>",
             Duration = 10,
             Show = true,
+            FadeOut = true,
+            TargetPosX = 0,
+            TargetPosY = 300,
         };
 
         [Description("The centered text (header) of the category.")]

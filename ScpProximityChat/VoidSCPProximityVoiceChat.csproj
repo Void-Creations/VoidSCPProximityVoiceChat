@@ -7,14 +7,14 @@
     <ProjectGuid>{134E709F-0978-4774-9291-81C2C301F6E0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ScpProximityChat</RootNamespace>
-    <AssemblyName>ScpProximityChat</AssemblyName>
+    <RootNamespace>VoidSCPProximityVoiceChat</RootNamespace>
+    <AssemblyName>VoidSCPProximityVoiceChat</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <LangVersion>9</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -67,6 +67,9 @@
     </Reference>
     <Reference Include="Exiled.Permissions, Version=9.4.0.0, Culture=neutral, processorArchitecture=AMD64">
       <HintPath>..\packages\ExMod.Exiled.9.4.0\lib\net48\Exiled.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="HintServiceMeow-Exiled">
+      <HintPath>..\OtherReferences\HintServiceMeow\HintServiceMeow-Exiled.dll</HintPath>
     </Reference>
     <Reference Include="Mirror">
       <HintPath>..\References\Mirror.dll</HintPath>

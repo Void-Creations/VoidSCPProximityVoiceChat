@@ -11,6 +11,9 @@ using UserSettings.ServerSpecific;
 using VoiceChat;
 using VoiceChat.Networking;
 using Object = UnityEngine.Object;
+using HintServiceMeow.Core.Utilities;
+using HintServiceMeow.Core.Models.Hints;
+using System;
 
 namespace VoidSCPProximityVoiceChat
 {
@@ -47,7 +50,7 @@ namespace VoidSCPProximityVoiceChat
         {
             Exiled.Events.Handlers.Server.RestartingRound -= OnRoundRestarting;
             Exiled.Events.Handlers.Player.VoiceChatting -= OnVoiceChatting;
-            Exiled.Events.Handlers.Player.ChangingRole-= OnChangingRole;
+            Exiled.Events.Handlers.Player.ChangingRole -= OnChangingRole;
 
             switch (_config.ActivationType)
             {
@@ -93,7 +96,7 @@ namespace VoidSCPProximityVoiceChat
                     if (target.Role is not IVoiceRole voiceRole || voiceRole.VoiceModule.ValidateReceive(player.ReferenceHub, VoiceChatChannel.Proximity) == VoiceChatChannel.None)
                         continue;
 
-                    if(_config.UseDefaultScpChat && target.IsScp)
+                    if (_config.UseDefaultScpChat && target.IsScp)
                         continue;
 
                     target.ReferenceHub.connectionToClient.Send(audioMessage);
@@ -107,23 +110,57 @@ namespace VoidSCPProximityVoiceChat
         {
             Player player = ev.Player;
 
-            if(_toggledPlayers.ContainsKey(player))
+            if (_toggledPlayers.ContainsKey(player))
             {
                 ToggleProximity(player);
             }
 
-            if(_config.ScpRoles.Contains(ev.NewRole))
+            if (_config.ScpRoles.Contains(ev.NewRole))
             {
                 Message message = _config.ProximityChatRole;
-                switch (message.Type)
+                //switch (message.Type)
+                //{
+                //    case MessageType.Broadcast when message.Show:
+                //        player.Broadcast(message.Duration, message.Content);
+                //        break;
+                //    case MessageType.Hint when message.Show:
+                //        player.ShowHint(message.Content, message.Duration);
+                //        break;
+                //}
+                if (!message.Show) return;
+
+                PlayerDisplay playerDisplay = PlayerDisplay.Get(player);
+
+                DynamicHint messageDynamicHint = new DynamicHint
                 {
-                    case MessageType.Broadcast when message.Show:
-                        player.Broadcast(message.Duration, message.Content);
-                        break;
-                    case MessageType.Hint when message.Show:
-                        player.ShowHint(message.Content, message.Duration);
-                        break;
-                }
+                    Text = message.Text,
+                    TargetX = message.TargetPosX,
+                    TargetY = message.TargetPosY,
+                };
+
+                DateTime startTime = DateTime.Now;
+
+                messageDynamicHint.AutoText = (arg) =>
+                {
+                    var percentage = (DateTime.Now - startTime).TotalSeconds / message.Duration;
+                    if (percentage >= 1)
+                    {
+                        playerDisplay.RemoveHint(messageDynamicHint);
+                        return string.Empty;
+                    }
+
+                    if (!message.FadeOut) return message.Text;
+
+                    int alpha = (int)Math.Ceiling(255 - percentage * 255);
+                    Log.Debug($"Alpha: {alpha}");
+
+                    if (message.Text.Contains("%ALPHA%"))
+                        return message.Text.Replace("%ALPHA%", alpha.ToString("X2"));
+
+                    return $"<color=#FFFFFF{alpha.ToString("X2")}>{message.Text}</color>";
+                };
+
+                playerDisplay.AddHint(messageDynamicHint);
             }
         }
 
@@ -165,15 +202,40 @@ namespace VoidSCPProximityVoiceChat
                 OpusHandler.Remove(player);
 
                 Message message = _config.ProximityChatDisabled;
-                switch (message.Type)
+                if (!message.Show) return;
+
+                PlayerDisplay playerDisplay = PlayerDisplay.Get(player);
+
+                DynamicHint messageDynamicHint = new DynamicHint
                 {
-                    case MessageType.Broadcast when message.Show:
-                        player.Broadcast(message.Duration, message.Content);
-                        break;
-                    case MessageType.Hint when message.Show:
-                        player.ShowHint(message.Content, message.Duration);
-                        break;
-                }
+                    Text = message.Text,
+                    TargetX = message.TargetPosX,
+                    TargetY = message.TargetPosY,
+                };
+
+                DateTime startTime = DateTime.Now;
+
+                messageDynamicHint.AutoText = (arg) =>
+                {
+                    var percentage = (DateTime.Now - startTime).TotalSeconds / message.Duration;
+                    if (percentage >= 1)
+                    {
+                        playerDisplay.RemoveHint(messageDynamicHint);
+                        return string.Empty;
+                    }
+
+                    if (!message.FadeOut) return message.Text;
+
+                    int alpha = (int)Math.Ceiling(255 - percentage * 255);
+                    Log.Debug($"Alpha: {alpha}");
+
+                    if (message.Text.Contains("%ALPHA%"))
+                        return message.Text.Replace("%ALPHA%", alpha.ToString("X2"));
+
+                    return $"<color=#FFFFFF{alpha.ToString("X2")}>{message.Text}</color>";
+                };
+
+                playerDisplay.AddHint(messageDynamicHint);
             }
             else
             {
@@ -187,15 +249,40 @@ namespace VoidSCPProximityVoiceChat
                 _toggledPlayers.Add(player, speaker);
 
                 Message message = _config.ProximityChatEnabled;
-                switch (message.Type)
+                if (!message.Show) return;
+
+                PlayerDisplay playerDisplay = PlayerDisplay.Get(player);
+
+                DynamicHint messageDynamicHint = new DynamicHint
                 {
-                    case MessageType.Broadcast when message.Show:
-                        player.Broadcast(message.Duration, message.Content);
-                        break;
-                    case MessageType.Hint when message.Show:
-                        player.ShowHint(message.Content, message.Duration);
-                        break;
-                }
+                    Text = message.Text,
+                    TargetX = message.TargetPosX,
+                    TargetY = message.TargetPosY,
+                };
+
+                DateTime startTime = DateTime.Now;
+
+                messageDynamicHint.AutoText = (arg) =>
+                {
+                    var percentage = (DateTime.Now - startTime).TotalSeconds / message.Duration;
+                    if (percentage >= 1)
+                    {
+                        playerDisplay.RemoveHint(messageDynamicHint);
+                        return string.Empty;
+                    }
+
+                    if (!message.FadeOut) return message.Text;
+
+                    int alpha = (int)Math.Ceiling(255 - percentage * 255);
+                    Log.Debug($"Alpha: {alpha}");
+
+                    if (message.Text.Contains("%ALPHA%"))
+                        return message.Text.Replace("%ALPHA%", alpha.ToString("X2"));
+
+                    return $"<color=#FFFFFF{alpha.ToString("X2")}>{message.Text}</color>";
+                };
+
+                playerDisplay.AddHint(messageDynamicHint);
             }
         }
     }
