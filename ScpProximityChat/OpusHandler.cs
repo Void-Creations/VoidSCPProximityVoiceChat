@@ -3,7 +3,7 @@ using Exiled.API.Features;
 using VoiceChat.Codec;
 using VoiceChat.Codec.Enums;
 
-namespace ScpProximityChat
+namespace VoidSCPProximityVoiceChat
 {
     public class OpusHandler
     {

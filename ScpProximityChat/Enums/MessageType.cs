@@ -1,4 +1,4 @@
-namespace ScpProximityChat.Enums
+namespace VoidSCPProximityVoiceChat.Enums
 {
     public enum MessageType
     {

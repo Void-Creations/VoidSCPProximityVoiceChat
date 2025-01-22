@@ -6,13 +6,13 @@ using Exiled.API.Features.Roles;
 using Exiled.Events.EventArgs.Player;
 using Mirror;
 using PlayerRoles.FirstPersonControl;
-using ScpProximityChat.Enums;
+using VoidSCPProximityVoiceChat.Enums;
 using UserSettings.ServerSpecific;
 using VoiceChat;
 using VoiceChat.Networking;
 using Object = UnityEngine.Object;
 
-namespace ScpProximityChat
+namespace VoidSCPProximityVoiceChat
 {
     internal class EventHandlers
     {

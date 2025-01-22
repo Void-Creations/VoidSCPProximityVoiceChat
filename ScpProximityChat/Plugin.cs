@@ -4,14 +4,14 @@ using Exiled.API.Extensions;
 using Exiled.API.Features;
 using Exiled.API.Features.Core.UserSettings;
 using PlayerRoles;
-using ScpProximityChat.Enums;
+using VoidSCPProximityVoiceChat.Enums;
 
-namespace ScpProximityChat
+namespace VoidSCPProximityVoiceChat
 {
     public class Plugin : Plugin<Config>
     {
-        public override string Name { get; } = "ScpProximityChat";
-        public override string Author { get; } = "Bolton";
+        public override string Name { get; } = "VoidSCPProximityVoiceChat";
+        public override string Author { get; } = "Bolton, okunamayanad";
         public override Version Version { get; } = new(1, 0, 2);
         public override Version RequiredExiledVersion { get; } = new(9, 0, 0);
 

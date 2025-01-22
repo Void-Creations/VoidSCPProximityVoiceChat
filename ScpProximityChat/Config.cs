@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Exiled.API.Interfaces;
 using PlayerRoles;
-using ScpProximityChat.Enums;
+using VoidSCPProximityVoiceChat.Enums;
 
-namespace ScpProximityChat
+namespace VoidSCPProximityVoiceChat
 {
     public class Config : IConfig
     {

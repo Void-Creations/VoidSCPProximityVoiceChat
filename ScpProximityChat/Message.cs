@@ -1,7 +1,7 @@
 using System.ComponentModel;
-using ScpProximityChat.Enums;
+using VoidSCPProximityVoiceChat.Enums;
 
-namespace ScpProximityChat
+namespace VoidSCPProximityVoiceChat
 {
     public class Message
     {
